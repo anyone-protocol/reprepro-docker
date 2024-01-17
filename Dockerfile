@@ -14,7 +14,9 @@ RUN adduser --system --group --shell /bin/bash --uid 600 --disabled-password --h
 RUN usermod -p '*' reprepro
 
 # Create required directories
-RUN mkdir -p /data/debian/{tmp,incoming,conf}
+RUN mkdir -p /data/debian/conf
+RUN mkdir -p /data/debian/incoming
+RUN mkdir -p /data/debian/tmp
 RUN mkdir -p /config
 
 ADD sshd_config /sshd_config
