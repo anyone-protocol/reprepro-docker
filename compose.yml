@@ -2,12 +2,29 @@ version: '3'
 
 services:
   reprepro:
-    image: reprepro-docker
+    build: .
     restart: unless-stopped
-    env_file:
-      - .env
     ports:
-      - "22:22"
+      - "8022:22"
     volumes:
       - ./config:/config:ro
       - ./data/:/data
+
+  dput:
+    build:
+      context: .
+      dockerfile: dput.Dockerfile
+    volumes:
+      - ./.dput.cf:/root/.dput.cf:ro
+      - ./id_rsa:/root/.ssh/id_rsa:ro
+      - ./id_rsa.pub:/root/.ssh/id_rsa.pub:ro
+      - ./config:/config:ro
+      - ./changes:/changes
+
+  nginx:
+    image: nginx:stable
+    ports:
+      - "8080:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./data/debian:/usr/share/nginx/html:ro

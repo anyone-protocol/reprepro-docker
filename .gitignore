@@ -1,3 +1,6 @@
 config/
 data/
+changes/
 .env
+.dput.cf
+id_rsa*
