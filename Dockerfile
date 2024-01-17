@@ -13,6 +13,10 @@ RUN echo "REPREPRO_BASE_DIR=/data/debian" > /etc/environment
 RUN adduser --system --group --shell /bin/bash --uid 600 --disabled-password --home /home/reprepro reprepro
 RUN usermod -p '*' reprepro
 
+# Create required directories
+RUN mkdir -p /data/debian/{tmp,incoming,conf}
+RUN mkdir -p /config
+
 ADD sshd_config /sshd_config
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
