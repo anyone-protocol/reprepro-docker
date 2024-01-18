@@ -7,7 +7,7 @@ RUN apt-get update && \
 RUN echo "deb https://deb.debian.org/debian experimental main" >> /etc/apt/sources.list
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-  reprepro
+  reprepro=5.4.3-1
 
 RUN ssh-keygen -A
 
