@@ -2,7 +2,12 @@ FROM debian:bookworm
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-  gnupg reprepro openssh-server
+  gnupg openssh-server ca-certificates
+
+RUN echo "deb https://deb.debian.org/debian experimental main" >> /etc/apt/sources.list
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+  reprepro
 
 RUN ssh-keygen -A
 
